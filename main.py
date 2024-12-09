@@ -124,8 +124,8 @@ def get_min_max_by_time(hour=None, minute=None, fullTime=None):
         # (1000 * (14 + 1)) / 10 = 1500
         # (1000 * (14 + 2)) / 10 = 1600
         # (1000 * (14 + 3)) / 10 = 1600
-        step = max(1000 * (hour + minute) // 10, 1)
-        # step = random.randint(23100, 26000)
+        # step = max(1000 * (hour + minute) // 10, 1)
+        step = random.randint(23100, 26000)
 
 
     # 最小值、最大值
@@ -244,7 +244,7 @@ class MiMotionRunner:
         print(f"进入了请求：当前完整时间为：{date_str}, 时时间戳为：{t}, 账号信息：{self.user}")
 
         response = requests.post(url, data=data, headers=head).json()
-        print(f"接口响应数据：{response}")
+        print(f"请求地址：{url}, 接口响应数据：{response}")
 
         return f"修改步数（{step}）[" + response['msg'] + "]", True
 
