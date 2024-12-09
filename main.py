@@ -63,7 +63,7 @@ def get_beijing_time():
             print(f"==========================================")
             print(f"解析北京时间为：{full_time} --- {hour}小时 --- {minute}")
             # return datetime.now()
-            return TimeInfo(int(hour), int(minute), fullTime=full_time)
+            return TimeInfo(int(hour), int(minute), int(fullTime))
         else:
             print("解析北京时间字符串失败！")
             return None
@@ -98,9 +98,8 @@ def get_min_max_by_time(hour=None, minute=None):
     if minute is None:
         minute = time_bj.minute
 
-    full_time = time_bj.fullTime
     print(f"==========================================")
-    print(f"当前北京时间为：完整时间：{full_time} ---- {hour}小时 --- {minute}分钟 --- ")
+    print(f"当前北京时间为：完整时间： ---- {hour}小时 --- {minute}分钟 --- ")
     print(f"==========================================")
     print(f"刷步区间值：\n早上6-8点区间步数：5k\n早上8-12点区间步数：1w\n下午5-7点区间步数：1.5w\n下午7-8点区间步数：2w")
     print(f"==========================================")
