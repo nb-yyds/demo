@@ -80,14 +80,8 @@ def get_beijing_time():
 # 格式化时间
 def format_now():
     # 获取当前的日期和时间
-    now = datetime.now()
-
-    # 将日期和时间格式化为指定的字符串格式
-    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
-
-    print(f"格式化时间: --- {formatted_now}")
-
-    return formatted_now
+    fullTime = time_bj.full_time
+    return fullTime
 
 
 # 获取默认值转int
