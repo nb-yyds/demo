@@ -27,5 +27,5 @@ jobs:
             CONFIG: ${{ secrets.CONFIG }}
         run: |
           pip3 install requests
-          pip3 install pytz
+          pip3 install pytz==2024.2
           python3 main.py
