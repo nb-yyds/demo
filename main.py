@@ -47,22 +47,23 @@ def get_min_max_by_time(hour=None, minute=None):
     # 0点为执行高峰，排队可能会延后一两小时才执行
     # 设置的actions自动执行时间为：0,10,11,12,23
     # 默认值
-    step = 1000
+    step = None
+
     # 早上
     if 6 <= hour < 12:
         step = random.randint(3100, 10000)
     # 中午
-    elif 15 <= hour < 16:
-    step =  random.randint(11000, 18000)
+    elif 16 <= hour < 17:
+        step =  random.randint(11000, 18000)
     # 下午
-    elif 16 <= hour < 23:
+    elif 17 <= hour < 23:
         step = random.randint(20000, 26000)
     # 其他
     else:
         # (1000 * (14 + 1)) / 10 = 1500
         # (1000 * (14 + 2)) / 10 = 1600
         # (1000 * (14 + 3)) / 10 = 1600
-        step = min(step * (hour + minute) / 10, 1)
+        step = min(1000 * (hour + minute) / 10, 1)
 
 
     # 最小值、最大值
@@ -179,7 +180,7 @@ class MiMotionRunner:
 
         response = requests.post(url, data=data, headers=head).json()
         print(f"接口响应数据：{response}")
-        
+
         return f"修改步数（{step}）[" + response['msg'] + "]", True
 
 
