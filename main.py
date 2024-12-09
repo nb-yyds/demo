@@ -16,6 +16,15 @@ import requests
 
 TimeInfo = namedtuple('TimeInfo', ['hour', 'minute'])
 
+# 获取时间戳
+def get_time():
+    url = 'http://worldtimeapi.org/api/timezone/Asia/Shanghai'
+    response = requests.get(url, headers=headers).json()
+    t = str(response['unixtime'])+'000'
+     print(f"==========================================")
+    print(f"获取时间戳为：{t}")
+    return t
+
 # 获取北京时间
 def get_beijing_time():
     # target_timezone = pytz.timezone('Asia/Shanghai')
@@ -58,7 +67,7 @@ def get_beijing_time():
 
 # 格式化时间
 def format_now():
-    return get_beijing_time().strftime("%Y-%m-%d %H:%M:%S")
+    return get_time().strftime("%Y-%m-%d %H:%M:%S")
 
 
 # 获取默认值转int
