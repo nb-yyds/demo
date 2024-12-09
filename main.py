@@ -19,9 +19,6 @@ def get_beijing_time():
     # return datetime.now().astimezone(target_timezone)
 
 
-    global K, type
-    K = 1.0
-    type = ""
     hea = {'User-Agent': 'Mozilla/5.0'}
     url = r'https://apps.game.qq.com/CommArticle/app/reg/gdate.php'
     r = requests.get(url=url, headers=hea)
@@ -33,7 +30,7 @@ def get_beijing_time():
         find = re.search(pattern, result)
         hour = find.group(1)
         print(f"==========================================")
-    print(f"解析北京时间为：{hour}小时 --- {find}")
+        print(f"解析北京时间为：{hour}小时 --- {find}")
         return datetime.now()
     else:
         print("获取北京时间失败")
