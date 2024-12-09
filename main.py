@@ -2,6 +2,9 @@
 import math
 import traceback
 import datetime
+from collections import namedtuple
+import re
+
 
 import json
 import random
@@ -11,6 +14,7 @@ import os
 
 import requests
 
+TimeInfo = namedtuple('TimeInfo', ['hour', 'minute'])
 
 # 获取北京时间
 def get_beijing_time():
@@ -42,7 +46,8 @@ def get_beijing_time():
             # 打印结果
             print(f"==========================================")
             print(f"解析北京时间为：{hour}小时 --- {minute}")
-            return datetime.now()
+            # return datetime.now()
+            return TimeInfo(int(hour), int(minute))
         else:
             print("解析北京时间字符串失败！")
             return
@@ -114,7 +119,6 @@ def fake_ip():
 
 # 账号脱敏
 def desensitize_user_name(user):
-    return user
     if len(user) <= 8:
         ln = max(math.floor(len(user) / 3), 1)
         return f'{user[:ln]}***{user[-ln:]}'
@@ -190,7 +194,7 @@ class MiMotionRunner:
         self.log_str += f"已设置为随机步数范围({min_step}~{max_step}) 随机值:{step}\n"
 
         # 时间戳
-        t = get_time()
+        t = datetime.now()
 
         # 请求地址
         url = f'https://api.faithxy.com/motion/api/motion/Xiaomi?t={t}'
@@ -208,7 +212,7 @@ class MiMotionRunner:
             "num": f"{step}",
         }
 
-        print(f"进入了请求：当前时时间戳为：{t}, 账号信息：{data}")
+        print(f"进入了请求：当前时时间戳为：{t}, 账号信息：{self.user}")
 
         response = requests.post(url, data=data, headers=head).json()
         print(f"接口响应数据：{response}")
