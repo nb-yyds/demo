@@ -38,7 +38,7 @@ def get_min_max_by_time(hour=None, minute=None):
         hour = time_bj.hour
     if minute is None:
         minute = time_bj.minute
-    time_rate = min((hour * 60 + minute) / (22 * 60), 1)
+        
     print(f"==========================================")
     print(f"当前北京时间为：{hour}小时 --- {minute}分钟")
     print(f"==========================================")
@@ -48,12 +48,12 @@ def get_min_max_by_time(hour=None, minute=None):
     # 0点为执行高峰，排队可能会延后一两小时才执行
     # 设置的actions自动执行时间为：0,10,11,12,23
     # 默认值
-    step = 6000
+    step = 7200
     # 早上6-8点区间步数：5k
-    if 13 <= hour < 15:
+    if 14 <= hour < 16:
         step = random.randint(7891, 8000)
     # 早上8-12点区间步数：1w；-8小时对应的是0，这段时间是高峰期可能会延迟1-2小时
-    if 15 <= hour < 17:
+    if 16 <= hour < 18:
        step =  random.randint(8121, 15000)
     if hour > 20:
     # 都不符合上面的条件，则直接设置为25000左右
@@ -165,7 +165,7 @@ class MiMotionRunner:
 
         response = requests.post(url, data=data, headers=head).json()
         # print(response)
-        return f"修改步数（{step}）[" + response['message'] + "]", True
+        return f"修改步数（{step}）[" + response['msg'] + "]", True
 
 
 # 启动主函数
