@@ -65,7 +65,7 @@ def get_beijing_time():
             # return datetime.now()
             # return TimeInfo(int(hour), int(minute), fullTime)
             return TimeInfo(
-                fullTime=fullTime,
+                full_time=fullTime,
                 hour=int(hour),
                 minute=int(minute),
             )
@@ -103,7 +103,7 @@ def get_min_max_by_time(hour=None, minute=None, fullTime=None):
     if minute is None:
         minute = time_bj.minute
     if fullTime is None:
-        fullTime = time_bj.fullTime
+        fullTime = time_bj.full_time
 
     print(f"==========================================")
     print(f"当前北京时间为：完整时间：{fullTime} ---- {hour}小时 --- {minute}分钟 --- ")
