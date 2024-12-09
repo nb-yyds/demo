@@ -83,7 +83,6 @@ def fake_ip():
 
 # 账号脱敏
 def desensitize_user_name(user):
-    return user
     if len(user) <= 8:
         ln = max(math.floor(len(user) / 3), 1)
         return f'{user[:ln]}***{user[-ln:]}'
@@ -177,7 +176,7 @@ class MiMotionRunner:
             "num": f"{step}",
         }
 
-        print(f"进入了请求：当前时时间戳为：{t}, 账号信息：{data}")
+        # print(f"进入了请求：当前时时间戳为：{t}, 账号：{self.user}")
 
         response = requests.post(url, data=data, headers=head).json()
         print(f"接口响应数据：{response}")
