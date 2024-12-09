@@ -1,7 +1,9 @@
 # -*- coding: utf8 -*-
 import math
 import traceback
-import datetime
+# 必须这样写，才能调用now等方法
+from datetime import datetime
+# 定义类
 from collections import namedtuple
 import re
 
@@ -108,8 +110,8 @@ def get_min_max_by_time(hour=None, minute=None):
         # (1000 * (14 + 1)) / 10 = 1500
         # (1000 * (14 + 2)) / 10 = 1600
         # (1000 * (14 + 3)) / 10 = 1600
-        # step = max(1000 * (hour + minute) // 10, 1)
-        step = random.randint(23100, 26000)
+        step = max(1000 * (hour + minute) // 10, 1)
+        # step = random.randint(23100, 26000)
 
 
     # 最小值、最大值
