@@ -80,10 +80,12 @@ def fake_ip():
 
 # 账号脱敏
 def desensitize_user_name(user):
+    return user
+    
     if len(user) <= 8:
         ln = max(math.floor(len(user) / 3), 1)
         return f'{user[:ln]}***{user[-ln:]}'
-    return f'{user[:3]}****{user[-4:]}'
+    # return f'{user[:3]}****{user[-4:]}'
 
 
 # 获取时间戳
@@ -142,7 +144,7 @@ class MiMotionRunner:
         else:
             self.is_phone = False
         self.user = user
-        self.fake_ip_addr = fake_ip()
+        self.fake_ip_addr = ''
         self.log_str += f"创建虚拟ip地址：{self.fake_ip_addr}\n"
 
     # 登录
