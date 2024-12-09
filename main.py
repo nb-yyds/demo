@@ -27,7 +27,8 @@ def get_beijing_time():
     if r.status_code == 200:
         result = r.text
         # 正则表达式
-        pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
+        # pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
+        pattern = re.compile(r'\d{4}-\d{2}-\d{2} (\d{2}):(\d{2}):\d{2}')
         # 搜索匹配项
         find = re.search(pattern, result)
 
@@ -44,6 +45,7 @@ def get_beijing_time():
             return datetime.now()
         else:
             print("解析北京时间字符串失败！")
+            return
     else:
         print("获取北京时间的接口响应失败！")
         return
