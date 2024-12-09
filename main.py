@@ -1,8 +1,7 @@
 # -*- coding: utf8 -*-
 import math
 import traceback
-from datetime import datetime
-import pytz
+import datetime
 
 import json
 import random
@@ -15,9 +14,30 @@ import requests
 
 # 获取北京时间
 def get_beijing_time():
-    target_timezone = pytz.timezone('Asia/Shanghai')
-    # 获取当前时间
-    return datetime.now().astimezone(target_timezone)
+    # target_timezone = pytz.timezone('Asia/Shanghai')
+    # # 获取当前时间
+    # return datetime.now().astimezone(target_timezone)
+
+
+    global K, type
+    K = 1.0
+    type = ""
+    hea = {'User-Agent': 'Mozilla/5.0'}
+    url = r'https://apps.game.qq.com/CommArticle/app/reg/gdate.php'
+    r = requests.get(url=url, headers=hea)
+    print(f"==========================================")
+    print(f"获取北京时间为：{r}")
+    if r.status_code == 200:
+        result = r.text
+        pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
+        find = re.search(pattern, result)
+        hour = find.group(1)
+        print(f"==========================================")
+    print(f"解析北京时间为：{hour}小时 --- {find}")
+        return datetime.now()
+    else:
+        print("获取北京时间失败")
+        return
 
 
 # 格式化时间
@@ -83,6 +103,7 @@ def fake_ip():
 
 # 账号脱敏
 def desensitize_user_name(user):
+    return user
     if len(user) <= 8:
         ln = max(math.floor(len(user) / 3), 1)
         return f'{user[:ln]}***{user[-ln:]}'
@@ -176,7 +197,7 @@ class MiMotionRunner:
             "num": f"{step}",
         }
 
-        # print(f"进入了请求：当前时时间戳为：{t}, 账号：{self.user}")
+        print(f"进入了请求：当前时时间戳为：{t}, 账号信息：{data}")
 
         response = requests.post(url, data=data, headers=head).json()
         print(f"接口响应数据：{response}")
