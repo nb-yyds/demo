@@ -49,13 +49,13 @@ def get_min_max_by_time(hour=None, minute=None):
     # 默认值
     step = 1000
     # 早上6-8点区间步数：5k
-    if 6 <= hour < 8:
+    if 11 <= hour < 12:
         step = random.randint(3891, 5000)
     # 早上8-12点区间步数：1w；-8小时对应的是0，这段时间是高峰期可能会延迟1-2小时
-    elif 8 <= hour < 12:
+    elif 12 <= hour < 13:
        step =  random.randint(5121, 10000)
     # 下午5-7点区间步数：1.5w
-    elif 17 <= hour < 19:
+    elif 13 <= hour < 14:
         step = random.randint(10213, 15000)
     # 下午7-8点区间步数：2w
     elif 19 <= hour < 20:
