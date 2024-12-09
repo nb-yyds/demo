@@ -42,6 +42,8 @@ def get_beijing_time():
 
         # 检测是找到匹配项
         if find:
+            # 提取完整时间字符串
+            full_time = find.group(1)
             # 提取小时和分钟
             hour, minute = find.group(1, 2)
             # 将小时和分钟转为整数
@@ -49,7 +51,7 @@ def get_beijing_time():
             minute = int(minute)
             # 打印结果
             print(f"==========================================")
-            print(f"解析北京时间为：{hour}小时 --- {minute}")
+            print(f"解析北京时间为：{full_time} --- {hour}小时 --- {minute}")
             # return datetime.now()
             return TimeInfo(int(hour), int(minute))
         else:
