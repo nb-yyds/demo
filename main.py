@@ -46,13 +46,13 @@ def get_beijing_time():
         # 检测是找到匹配项
         if find:
             # 提取完整时间字符串
-            full_time = find.group()
-            print("完整时间字符串:", full_time)
+            fullTime = find.group()
+            print("完整时间字符串:", fullTime)
 
             # 提取小时和分钟
             # 提取小时和分钟（使用正则表达式）
             time_pattern = r"(\d{2}):(\d{2}):\d{2}"  # 匹配 'hh:mm:ss' 格式的时间
-            time_match = re.search(time_pattern, full_time)
+            time_match = re.search(time_pattern, fullTime)
             if time_match:
                 hour = time_match.group(1)  # 获取小时
                 minute = time_match.group(2)  # 获取分钟
@@ -61,7 +61,7 @@ def get_beijing_time():
 
             # 打印结果
             print(f"==========================================")
-            print(f"解析北京时间为：{full_time} --- {hour}小时 --- {minute}")
+            print(f"解析北京时间为：{fullTime} --- {hour}小时 --- {minute}")
             # return datetime.now()
             return TimeInfo(int(hour), int(minute), int(fullTime))
         else:
