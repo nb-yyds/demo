@@ -26,15 +26,26 @@ def get_beijing_time():
     print(f"获取北京时间为：{r}")
     if r.status_code == 200:
         result = r.text
+        # 正则表达式
         pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
+        # 搜索匹配项
         find = re.search(pattern, result)
-        hour = find.group(1)
-        minute = find.group(2)
-        print(f"==========================================")
-        print(f"解析北京时间为：{hour}小时 --- {minute}")
-        return datetime.now()
+
+        # 检测是找到匹配项
+        if find:
+            # 提取小时和分钟
+            hour, minute = find.group(1, 2)
+            # 将小时和分钟转为整数
+            hour = int(hour)
+            minute = int(minute)
+            # 打印结果
+            print(f"==========================================")
+            print(f"解析北京时间为：{hour}小时 --- {minute}")
+            return datetime.now()
+        else:
+            print("解析北京时间字符串失败！")
     else:
-        print("获取北京时间失败")
+        print("获取北京时间的接口响应失败！")
         return
 
 
