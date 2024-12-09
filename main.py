@@ -65,7 +65,7 @@ def get_beijing_time():
             # return datetime.now()
             # return TimeInfo(int(hour), int(minute), fullTime)
             return TimeInfo(
-                full_time=fullTime,
+                fullTime=fullTime,
                 hour=int(hour),
                 minute=int(minute),
             )
@@ -97,14 +97,16 @@ def get_int_value_default(_config: dict, _key, default):
 
 
 # 获取当前时间对应的最大和最小步数
-def get_min_max_by_time(hour=None, minute=None):
+def get_min_max_by_time(hour=None, minute=None, fullTime=None):
     if hour is None:
         hour = time_bj.hour
     if minute is None:
         minute = time_bj.minute
+    if fullTime is None:
+        fullTime = time_bj.fullTime
 
     print(f"==========================================")
-    print(f"当前北京时间为：完整时间：{time_bj.full_time} ---- {hour}小时 --- {minute}分钟 --- ")
+    print(f"当前北京时间为：完整时间：{fullTime} ---- {hour}小时 --- {minute}分钟 --- ")
     print(f"==========================================")
     print(f"刷步区间值：\n早上6-8点区间步数：5k\n早上8-12点区间步数：1w\n下午5-7点区间步数：1.5w\n下午7-8点区间步数：2w")
     print(f"==========================================")
