@@ -52,11 +52,11 @@ def get_min_max_by_time(hour=None, minute=None):
     # 早上
     if 6 <= hour < 12:
         step = random.randint(3100, 10000)
-    # 中午
-    elif 12 <= hour < 17:
-        step =  random.randint(11000, 18000)
     # 下午
-    elif 17 <= hour < 23:
+    elif 12 <= hour < 18:
+        step =  random.randint(11000, 18000)
+    # 晚上
+    elif 18 <= hour < 23:
         step = random.randint(20000, 26000)
     # 其他
     else:
