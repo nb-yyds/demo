@@ -29,8 +29,9 @@ def get_beijing_time():
         pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
         find = re.search(pattern, result)
         hour = find.group(1)
+        minute = find.group(2)
         print(f"==========================================")
-        print(f"解析北京时间为：{int(hour)}小时 --- {find.group(2)}")
+        print(f"解析北京时间为：{hour}小时 --- {minute}")
         return datetime.now()
     else:
         print("获取北京时间失败")
