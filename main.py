@@ -16,7 +16,7 @@ import os
 
 import requests
 
-TimeInfo = namedtuple('TimeInfo', ['hour', 'minute'])
+TimeInfo = namedtuple('TimeInfo', ['full_time', 'hour', 'minute'])
 
 
 # 获取北京时间
@@ -32,10 +32,12 @@ def get_beijing_time():
     print(f"==========================================")
     print(f"获取北京时间为：{r}")
     if r.status_code == 200:
+        # 数据为：var json_curdate = '2024-12-10 01:36:38';
         result = r.text
         # 正则表达式
         # pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
         pattern = re.compile(r'\d{4}-\d{2}-\d{2} (\d{2}):(\d{2}):\d{2}')
+
         # 搜索匹配项
         find = re.search(pattern, result)
         # 返回的 find 是一个 re.Match 对象。要从中提取匹配到的字符串，可以使用 group() 方法。
@@ -61,7 +63,7 @@ def get_beijing_time():
             print(f"==========================================")
             print(f"解析北京时间为：{full_time} --- {hour}小时 --- {minute}")
             # return datetime.now()
-            return TimeInfo(int(hour), int(minute))
+            return TimeInfo(full_time, int(hour), int(minute))
         else:
             print("解析北京时间字符串失败！")
             return None
@@ -96,8 +98,9 @@ def get_min_max_by_time(hour=None, minute=None):
     if minute is None:
         minute = time_bj.minute
 
+    full_time = time_bj.full_time
     print(f"==========================================")
-    print(f"当前北京时间为：{hour}小时 --- {minute}分钟")
+    print(f"当前北京时间为：完整时间：{full_time} ---- {hour}小时 --- {minute}分钟 --- ")
     print(f"==========================================")
     print(f"刷步区间值：\n早上6-8点区间步数：5k\n早上8-12点区间步数：1w\n下午5-7点区间步数：1.5w\n下午7-8点区间步数：2w")
     print(f"==========================================")
