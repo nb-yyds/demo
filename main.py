@@ -30,7 +30,7 @@ def get_beijing_time():
         find = re.search(pattern, result)
         hour = find.group(1)
         print(f"==========================================")
-        print(f"解析北京时间为：{hour}小时 --- {find}")
+        print(f"解析北京时间为：{int(hour)}小时 --- {find.group(2)}")
         return datetime.now()
     else:
         print("获取北京时间失败")
