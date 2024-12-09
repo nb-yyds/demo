@@ -59,12 +59,15 @@ def get_beijing_time():
 
 # 格式化时间
 def format_now():
-    # 获取当前的日期和时间（除了秒）
-    now = datetime.now().replace(second=0, microsecond=0)
-    # 构造一个新的datetime对象，使用当前日期和解析出的小时、分钟
-    target = now.replace(hour=time_bj.hour, minute=time_bj.minute)
-    print("格式化时间: {target}")
-    return target
+    # 获取当前的日期和时间
+    now = datetime.now()
+
+    # 将日期和时间格式化为指定的字符串格式
+    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    print(f"格式化时间: --- {formatted_now}")
+
+    return formatted_now
 
 
 # 获取默认值转int
