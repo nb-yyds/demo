@@ -218,8 +218,12 @@ class MiMotionRunner:
         step = str(random.randint(min_step, max_step))
         self.log_str += f"已设置为随机步数范围({min_step}~{max_step}) 随机值:{step}\n"
 
+        # 完整时间
+        date_str = time_bj.full_time
+        # 使用 strptime 解析字符串为 datetime 对象
+        dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
         # 时间戳
-        t = datetime.now()
+        t = dt.timestamp()
 
         # 请求地址
         url = f'https://api.faithxy.com/motion/api/motion/Xiaomi?t={t}'
@@ -237,7 +241,7 @@ class MiMotionRunner:
             "num": f"{step}",
         }
 
-        print(f"进入了请求：当前时时间戳为：{t}, 账号信息：{self.user}")
+        print(f"进入了请求：当前完整时间为：{date_str}, 时时间戳为：{t}, 账号信息：{self.user}")
 
         response = requests.post(url, data=data, headers=head).json()
         print(f"接口响应数据：{response}")
