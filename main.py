@@ -1,9 +1,7 @@
 # -*- coding: utf8 -*-
 import math
 import traceback
-# 必须这样写，才能调用now等方法
-from datetime import datetime
-# 定义类
+import datetime
 from collections import namedtuple
 import re
 
@@ -16,7 +14,7 @@ import os
 
 import requests
 
-TimeInfo = namedtuple('TimeInfo', ['hour', 'minute'])
+TimeInfo = namedtuple('TimeInfo', ['full_time', 'hour', 'minute'])
 
 
 # 获取北京时间
@@ -32,25 +30,30 @@ def get_beijing_time():
     print(f"==========================================")
     print(f"获取北京时间为：{r}")
     if r.status_code == 200:
+        # 接口返回的是这样的字符串：var json_curdate = '2024-12-10 01:11:52';
+        # 我们需要提取出时间字符串
         result = r.text
-        # 正则表达式
-        # pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
-        pattern = re.compile(r'\d{4}-\d{2}-\d{2} (\d{2}):(\d{2}):\d{2}')
+        # 使用正则表达式匹配时间字符串
+        # pattern = re.compile(r'\d{4}-\d{2}-\d{2} (\d{2}):(\d{2}):\d{2}')
+        pattern = re.compile(r"var json_curdate = '(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})';")
+        match = pattern.search(result)
         # 搜索匹配项
-        find = re.search(pattern, result)
+        # find = re.search(pattern, result)
 
         # 检测是找到匹配项
         if find:
+            # 提取完整时间字符串
+            full_time = match.group(1)
             # 提取小时和分钟
-            hour, minute = find.group(1, 2)
+            hour, minute = map(int, full_time.split().split(':')[:2])
             # 将小时和分钟转为整数
             hour = int(hour)
             minute = int(minute)
             # 打印结果
             print(f"==========================================")
-            print(f"解析北京时间为：{hour}小时 --- {minute}")
+            print(f"解析北京时间为：{full_time}  ----- {hour}小时 --- {minute}")
             # return datetime.now()
-            return TimeInfo(int(hour), int(minute))
+            return TimeInfo(full_time, int(hour), int(minute))
         else:
             print("解析北京时间字符串失败！")
             return
