@@ -43,7 +43,7 @@ def get_beijing_time():
         # 检测是找到匹配项
         if find:
             # 提取完整时间字符串
-            full_time = find.match
+            full_time = find.group()
             # 提取小时和分钟
             hour, minute = find.group(1, 2)
             # 将小时和分钟转为整数
