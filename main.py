@@ -50,20 +50,21 @@ def get_min_max_by_time(hour=None, minute=None):
     step = None
 
     # 早上
-    if 6 <= hour < 12:
-        step = random.randint(3100, 10000)
+    if 6 <= hour < 11:
+        step = random.randint(8000, 15000)
     # 下午
-    elif 12 <= hour < 18:
-        step =  random.randint(11000, 18000)
+    elif 11 <= hour < 16:
+        step =  random.randint(16000, 20000)
     # 晚上
-    elif 18 <= hour < 23:
-        step = random.randint(20000, 26000)
+    elif 16 <= hour < 21:
+        step = random.randint(21000, 23000)
     # 其他
     else:
         # (1000 * (14 + 1)) / 10 = 1500
         # (1000 * (14 + 2)) / 10 = 1600
         # (1000 * (14 + 3)) / 10 = 1600
-        step = max(1000 * (hour + minute) // 10, 1)
+        # step = max(1000 * (hour + minute) // 10, 1)
+        step = random.randint(23100, 26000)
 
 
     # 最小值、最大值
