@@ -21,7 +21,7 @@ def get_time():
     url = 'http://worldtimeapi.org/api/timezone/Asia/Shanghai'
     response = requests.get(url, headers=headers).json()
     t = str(response['unixtime'])+'000'
-     print(f"==========================================")
+    print(f"==========================================")
     print(f"获取时间戳为：{t}")
     return t
 
