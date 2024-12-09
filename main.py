@@ -16,7 +16,7 @@ import os
 
 import requests
 
-TimeInfo = namedtuple('TimeInfo', ['hour', 'minute', 'fullTime'])
+TimeInfo = namedtuple('TimeInfo', ['full_time', 'hour', 'minute'])
 
 
 # 获取北京时间
@@ -63,7 +63,12 @@ def get_beijing_time():
             print(f"==========================================")
             print(f"解析北京时间为：{fullTime} --- {hour}小时 --- {minute}")
             # return datetime.now()
-            return TimeInfo(int(hour), int(minute), fullTime)
+            # return TimeInfo(int(hour), int(minute), fullTime)
+            return TimeInfo(
+                full_time=fullTime,
+                hour=int(hour),
+                minute=int(minute),
+            )
         else:
             print("解析北京时间字符串失败！")
             return None
