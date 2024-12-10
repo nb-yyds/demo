@@ -243,10 +243,11 @@ class MiMotionRunner:
 
         print(f"进入了请求：当前完整时间为：{date_str}, 时时间戳为：{t}, 账号信息：{self.user}")
 
-        response = requests.post(url, data=data, headers=head).json()
-        print(f"请求地址：{url}, 接口响应数据：{response}")
+        response = requests.post(url, data=data, headers=head)
+        json_res = response.json()
+        print(f"请求地址：{url}, 接口响应数据：{response}, json格式：{json_res}")
 
-        return f"修改步数（{step}）[" + response['msg'] + "]", True
+        return f"修改步数（{step}）[" + json_res['msg'] + "]", True
 
 
 
