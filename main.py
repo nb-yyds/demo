@@ -30,7 +30,7 @@ def get_beijing_time():
     url = r'https://apps.game.qq.com/CommArticle/app/reg/gdate.php'
     r = requests.get(url=url, headers=hea)
     print(f"==========================================")
-    print(f"获取北京时间为：{r}")
+    print(f"调用接口获取北京时间为：{r}")
     if r.status_code == 200:
         # 数据为：var json_curdate = '2024-12-10 01:36:38';
         result = r.text
@@ -61,7 +61,7 @@ def get_beijing_time():
 
             # 打印结果
             print(f"==========================================")
-            print(f"解析北京时间为：{fullTime} --- {hour}小时 --- {minute}")
+            print(f"解析接口的北京时间为：{fullTime} --- {hour}小时 --- {minute}")
             # return datetime.now()
             # return TimeInfo(int(hour), int(minute), fullTime)
             return TimeInfo(
@@ -110,10 +110,10 @@ def get_min_max_by_time(hour=None, minute=None, fullTime=None):
     # 默认值
     step = None
 
-    # 早上
+    # 早上：一般在7:30分触发
     if 6 <= hour < 11:
         step = random.randint(8000, 15000)
-    # 下午
+    # 下午：一般在11：50分触发
     elif 11 <= hour < 16:
         step =  random.randint(16000, 20000)
     # 晚上
@@ -144,10 +144,12 @@ def fake_ip():
 
 # 账号脱敏
 def desensitize_user_name(user):
+    # 长度小于8
     if len(user) <= 8:
         ln = max(math.floor(len(user) / 3), 1)
         return f'{user[:ln]}***{user[-ln:]}'
-    return f'{user[:3]}****{user[-4:]}'
+    # 长度大于8，取前面2个，后面7个
+    return f'{user[:2]}****{user[-7:]}'
 
 
 # 获取时间戳
@@ -241,11 +243,11 @@ class MiMotionRunner:
             "num": f"{step}",
         }
 
-        print(f"进入了请求：当前完整时间为：{date_str}, 时时间戳为：{t}, 账号信息：{self.user}")
+        print(f"准备发送请求：当前完整时间为：{date_str}, 账号信息：{desensitize_user_name(self.user)}")
 
         response = requests.post(url, data=data, headers=head)
         json_res = response.json()
-        print(f"请求地址：{url}, 接口响应数据：{response}, json格式：{json_res}")
+        print(f"请求地址：{url}, \n接口响应数据：{response}, \njson格式：{json_res}")
 
         return f"修改步数（{step}）[" + json_res['msg'] + "]", True
 
