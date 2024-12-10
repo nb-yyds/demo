@@ -16,16 +16,18 @@ import os
 
 import requests
 
+# 暴露时，需要先在定义，这里面的字符串是固定的写法，比如full_time
 TimeInfo = namedtuple('TimeInfo', ['full_time', 'hour', 'minute'])
 
 
 # 获取北京时间
 def get_beijing_time():
+    # 通过 pytz 包获取时间，但是这个包经常报错
     # target_timezone = pytz.timezone('Asia/Shanghai')
     # # 获取当前时间
     # return datetime.now().astimezone(target_timezone)
 
-
+    # 换成调接口获取时间
     hea = {'User-Agent': 'Mozilla/5.0'}
     url = r'https://apps.game.qq.com/CommArticle/app/reg/gdate.php'
     r = requests.get(url=url, headers=hea)
@@ -102,7 +104,7 @@ def get_min_max_by_time(hour=None, minute=None, fullTime=None):
     print(f"==========================================")
     print(f"当前北京时间为：完整时间：{fullTime} ---- {hour}小时 --- {minute}分钟 --- ")
     print(f"==========================================")
-    print(f"刷步区间值：\n早上6-8点区间步数：5k\n早上8-12点区间步数：1w\n下午5-7点区间步数：1.5w\n下午7-8点区间步数：2w")
+    print(f"刷步区间值：\n早上6-11点区间步数：1.5w以下\n下午11-16点区间步数：2w以下\n晚上16-21点区间步数：2.3w以下\n21点以后区间步数：2.6w以下")
     print(f"==========================================")
 
     # 0点为执行高峰，排队可能会延后一两小时才执行
@@ -148,7 +150,7 @@ def desensitize_user_name(user):
     if len(user) <= 8:
         ln = max(math.floor(len(user) / 3), 1)
         return f'{user[:ln]}***{user[-ln:]}'
-    # 长度大于8，取前面2个，后面7个
+    # 长度大于8，取前面2个，后面6个
     return f'{user[:2]}****{user[-7:]}'
 
 
